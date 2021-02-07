@@ -24,7 +24,6 @@
 *.lai
 *.la
 *.a
-*.lib
 
 # Executables
 *.exe
@@ -50,3 +49,5 @@
 Debug/TestTask.tlog/
 
 Debug/
+
+.vs/TestTask/v15/
