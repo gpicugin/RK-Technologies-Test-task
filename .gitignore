@@ -51,3 +51,8 @@ Debug/TestTask.tlog/
 Debug/
 
 .vs/TestTask/v15/
+/.vs
+
+C\+\+/.vs/TestTask/v15/.suo
+
+*.ipch
