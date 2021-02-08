@@ -56,3 +56,4 @@ Debug/
 C\+\+/.vs/TestTask/v15/.suo
 
 *.ipch
+/C++/.vs

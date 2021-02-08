@@ -1,9 +1,9 @@
 // TestTask.cpp : This file contains the 'main' function. Program execution begins and ends there.
-// 0.2126 + 0.7152 + 0.0722
+
 
 #include <iostream>
 #define cimg_use_jpeg
-#include "CImg/CImg.h"
+#include "../CImg/CImg.h"
 #include <string>
 #include <sstream>
 #define u_char unsigned char
@@ -45,31 +45,33 @@ void Luma(Pixel pixel, int value)
 }
 
 int main() {
-    CImg<u_char> image("lena\\lena.jpg"), visu(500, 400, 1, 3, 0);
+    std::string filename_src = "..\\lena_result\\lena.jpg";
+    CImg<u_char> image(filename_src.c_str()), visu(500, 400, 1, 3, 0);
     const u_char red[] = { 255,0,0 }, green[] = { 0,255,0 }, blue[] = { 0,0,255 };
     
     Pixel pixel;
     int width = image.width();
     int height = image.height();
-    for(int value = -255; value < 256; value++)
+    int value;
+    std::cin >> value;
+
+    CImg<u_char> image2 = image;
+
+    for (int i = 0; i < width; i++)
     {
-        CImg<u_char> image2 = image;     
-
-        for (int i = 0; i < width; i++)
+        for (int j = 0; j < height; j++)
         {
-            for (int j = 0; j < height; j++)
-            {
-                pixel.r = image2.data(i, j, 0, 0);
-                pixel.g = image2.data(i, j, 0, 1);
-                pixel.b = image2.data(i, j, 0, 2);
-                Luma(pixel, value);
-            }
+            pixel.r = image2.data(i, j, 0, 0);
+            pixel.g = image2.data(i, j, 0, 1);
+            pixel.b = image2.data(i, j, 0, 2);
+            Luma(pixel, value);
         }
-        std::stringstream ss;
-        ss << "lena\\lena" << value << ".jpg";
-
-        image2.save(ss.str().c_str()); 
     }
+    std::stringstream ss;
+    ss << filename_src.erase(filename_src.size() - 4) << "_brightness_" << value << ".jpg";
+
+    image2.save(ss.str().c_str());
+    
     return 0;  
 }
 
